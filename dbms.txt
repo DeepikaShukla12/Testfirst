@@ -1,0 +1,144 @@
+SELECT * FROM [Orders]
+Join Shippers on Shippers.ShipperID = Orders.ShipperID
+
+SELECT * FROM <TABLE_NAME_A>
+JOIN <TABLE_NAME_B> ON <TABLE_NAME_B>.<PRIMARY_KEY> = <TABLE_NAME_A>.<PRIMARY_KEY>
+WHERE <COLUMN_NAME> = <VALUE>
+
+
+SELECT phone FROM [Orders]
+Join Shippers on Shippers.ShipperID = Orders.ShipperID
+WHERE Shippers.ShipperName ='United Package'
+
+SELECT * FROM [Orders]
+Join shippers on Shippers.ShipperID= Orders.ShipperID
+Where Shippers.phone like ('(503) 555-%')-- > to match the first 3 numbers 
+or 
+Where Shippers.phone 1
+
+Select distinct CustomerName, ContactName, City from  0Customers
+
+
+
+
+select * from (SELECT country, COUNT(*) as lkjh FROM Customers 
+group by country)
+where lkjh >3;
+
+To Calcualte the numbers
+
+SELECT OrderDetails.OrderId, Products.ProductId,OrderDetails.Quantity, Products.Productname, Products.Price,
+(orderdetails.quantity * products.price) Amount FROM [OrderDetails]
+Join Products on Products.ProductID = OrderDetails.ProductID
+Where OrderDetails.OrderID= 10248 
+
+Aliasas 
+SELECT * FROM Products p
+join orderdetails o on o.productid = p.productid
+
+To read characters 
+SELECT p.productid, substr(p.productname,0,4)||substr(p.productname,length(p.productname)+1,-3) FROM Products p
+join orderdetails o on o.productid = p.productid
+--,3
+--,2
+
+*******************************************
+[?11/?7/?2019 4:41 PM]  Leaman, David:  
+Great. Take a look at the "All Active CE Students (ignore CASL)" query and see how much of it you understand.
+Have you done the JOIN keyword yet?
+ 
+[?11/?7/?2019 4:42 PM]  Shukla, Deepika:  
+I did JOIN but I am not confident on this part. every time I get stuck 
+ 
+
+
+
+SELECT DISTINCT pidm from 
+
+(SELECT DISTINCT sgbstdn_pidm pidm 
+  FROM saturn.sgbstdn ss
+Union 
+ SELECT DISTINCT nbrjobs_pidm pidm 
+    FROM posnctl.nbrjobs
+)
+****************************************************************************************************************************
+Today 5th Dec 2019
+
+NBRBJOB
+NBRJOBS
+
+Select SPRIDEN_LAST_NAME, SPRIDEN_FIRST_NAME, sgbstdn.sgbstdn_term_code_eff, spriden.spriden_id from Spriden
+Inner Join SGBSTDN  ON Spriden_PIDM = SGBSTDN_PIDM 
+Where SGBSTDN_TERM_CODE_EFF = '199433'
+AND spriden.spriden_change_ind is null 
+;
+
+***********************************************************************************************************************
+
+Today 5th Dec 2019
+
+Select * from SATURN.stvterm;
+
+Select * from SGBSTDN;
+
+--Select SGBSTDN_TERM_CODE_EFF from SGBSTDN ;
+--where SGBSTDN_TERM_CODE_EFF = '199433';
+
+Select SPRIDEN_LAST_NAME, SPRIDEN_FIRST_NAME, spriden.spriden_id, 
+sgbstdn.sgbstdn_term_code_eff , sgbstdn.sgbstdn_term_code_matric
+from Spriden
+inner  Join SGBSTDN  ON Spriden_PIDM = SGBSTDN_PIDM 
+Where SGBSTDN_TERM_CODE_EFF = '199433'
+--where SGBSTDN_TERM_CODE_EFF is null 
+AND spriden.spriden_change_ind is null 
+;
+
+Select * from Spriden 
+where Spriden_PIDM = 380467;
+
+desc sgbstdn;
+
+**************************************************************************************************************************
+December 6th 2019 
+
+To count the list number and total active employee 
+
+--select count(*) from (
+--Select distinct nbrjobs_pidm from (
+
+select nbrjobs_pidm, max(nbrjobs_effective_date) from nbrjobs
+where nbrjobs_status = 'A'
+group by nbrjobs_pidm
+order by nbrjobs_pidm;
+--));
+
+***********************************************************************************
+
+Select b.NBRJOBS_DESC, b.NBRJOBS_PIDM,b.NBRJOBS_EFFECTIVE_DATE,a.SPRIDEN_LAST_NAME, a.SPRIDEN_FIRST_NAME From Spriden a, nbrjobs b
+where a.SPRIDEN_PIDM = b.nbrjobs_pidm and b.nbrjobs_effective_date is not null 
+and NBRJOBS_STATUS = 'A';
+
+****************************************************************************************************
+
+Okay. The definition of an "active employee" is:
+A person with at least one active job record
+The definition of an "active job record" is:
+A job record with an effective date in the past, 
+whose termination date is either in the future or null, whose status is "A", 
+and which has no corresponding job record in status "T".
+
+********************************************************************************************************
+
+16 Dec 2019 
+
+select * from spriden;
+select * from sgbstdn;
+select * from STVMAJR;
+
+select  spriden_first_name, spriden_last_name, STVMAJR_DESC, SPRIDEN_ID from spriden 
+Inner join SGBSTDN on SGBSTDN_PIDM = SPRIDEN_PIDM 
+Inner join STVMAJR on STVMAJR_CODE = sgbstdn.sgbstdn_majr_code_1
+where SPRIDEN_CHANGE_IND is NULL And SGBSTDN_TERM_CODE_EFF = 201915 AND sgbstdn.sgbstdn_majr_code_1= '967'
+
+
+Dav, I need to go home. I am feeling dizziness 
