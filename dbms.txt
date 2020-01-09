@@ -140,5 +140,11 @@ Inner join SGBSTDN on SGBSTDN_PIDM = SPRIDEN_PIDM
 Inner join STVMAJR on STVMAJR_CODE = sgbstdn.sgbstdn_majr_code_1
 where SPRIDEN_CHANGE_IND is NULL And SGBSTDN_TERM_CODE_EFF = 201915 AND sgbstdn.sgbstdn_majr_code_1= '967'
 
+************************************************************************
+To find last 3 yrs student list. 
 
-Dav, I need to go home. I am feeling dizziness 
+select  spriden_first_name, spriden_last_name, STVMAJR_DESC, SGBSTDN_TERM_CODE_EFF ,SPRIDEN_ID from spriden 
+Inner join SGBSTDN on SGBSTDN_PIDM = SPRIDEN_PIDM 
+Inner join STVMAJR on STVMAJR_CODE = sgbstdn.sgbstdn_majr_code_1
+where SPRIDEN_CHANGE_IND is NULL And SGBSTDN_TERM_CODE_EFF >= (Select min(stvterm_code) from STVTERM
+where extract(year from stvterm_start_date) between extract(year from sysdate)-3 and extract(year from sysdate))
